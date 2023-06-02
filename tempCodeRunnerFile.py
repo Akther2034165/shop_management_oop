@@ -1,1 +1,0 @@
-shop1.show_products(

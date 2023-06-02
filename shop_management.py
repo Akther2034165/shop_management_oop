@@ -24,11 +24,13 @@ class Store:
     def buy_product(self, name, quantity):
         if name in self.__products_price:
             if self.__products_quantity[name] >= quantity:
+
                 # profit calculate
-                self.__profit += ((5*self.__products_price[name])/100)*quantity
+                self.__profit += ((5 *
+                                  self.__products_price[name])/100) * quantity
                 # deduct product quantity
-                self.__products_quantity[name] = self.__products_quantity[name] - quantity
-                print("thank you")
+                self.__products_quantity[name] -= quantity
+                print("Thank you for purchasing")
             else:
                 print("Unavailable")
         else:
