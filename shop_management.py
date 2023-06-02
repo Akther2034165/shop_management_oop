@@ -9,20 +9,37 @@ class Product:
 
 
 class Store:
-    def __init__(self):
+    def __init__(self) -> None:
         self.__products_price = {}
         self.__products_quantity = {}
+        self.__profit = 0
 
     def add_product(self, name, price, quantity):
+
         product = Product(name, price, quantity)
 
-        # appending price and quantity to the dictionary
         self.__products_price[product.product_name] = product.product_price
         self.__products_quantity[product.product_name] = product.product_quantity
 
+    def buy_product(self, name, quantity):
+        if name in self.__products_price:
+            if self.__products_quantity[name] >= quantity:
+                # profit calculate
+                self.__profit += ((5*self.__products_price[name])/100)*quantity
+                # deduct product quantity
+                self.__products_quantity[name] = self.__products_quantity[name] - quantity
+                print("thank you")
+            else:
+                print("Unavailable")
+        else:
+            print("Not Found")
+
     def show_products(self):
-        print("all product price: ", self.__products_price)
-        print("all product quantity: ", self.__products_quantity)
+        print("all products price: ", self.__products_price)
+        print("all products quantity: ", self.__products_quantity)
+
+    def show_profit(self):
+        print("profit: ", self.__profit)
 
 
 class Shop(Store):
@@ -32,7 +49,12 @@ class Shop(Store):
 
 
 shop1 = Shop('Muntasir Store')
-shop1.add_product('iphone', 120000, 10)
+shop1.add_product('iphone', 400, 12)
 shop1.add_product('asus laptop', 56000, 20)
 
-shop1.show_products()
+# shop1.show_products()
+
+# shop1.buy_product('iphone', 2)
+
+shop1.buy_product('iphone', 2)
+shop1.show_profit()
